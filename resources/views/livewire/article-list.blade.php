@@ -8,7 +8,7 @@
                     <h1 class="mb-2 text-xl">{{ $article->title }}</h1>
                     <div class="content">{{ $article->excerpt }}... <a href="{{ route('articles.show', $article->slug) }}" >[Lire la suite]</a></div>
                     <div class="flex justify-end gap-2.5 mt-4">
-                        <a href="{{ route('articles.edit', $article->slug) }}">Éditer</a>
+                        @livewire('edit-article', ['article' => $article], key('edit-'.$article->id))
                         @livewire('delete-article', ['article' => $article], key('delete-'.$article->id))
                     </div>
                 </li>

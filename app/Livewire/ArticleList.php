@@ -10,6 +10,7 @@ class ArticleList extends Component
     protected $listeners = [
         'articleCreated' => '$refresh',
         'articleDeleted' => '$refresh',
+        'articleUpdated' => '$refresh',
     ];
     
     public function render()
