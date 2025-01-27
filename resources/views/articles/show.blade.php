@@ -3,5 +3,5 @@
 @section('content')
 <h1 class="mb-2 mt-8 text-xl">{{ $article->title }}</h1>
 <p>{{ $article->content }}</p>
-<a href="{{ route('articles.index') }}" class="mt-8 bg-black text-white p-4 block text-center rounded-[5px]">Retour</a>
+<a href="/" class="w-full bg-blue-500 text-white px-4 py-2 rounded block text-center mt-2">Retour</a>
 @endsection
