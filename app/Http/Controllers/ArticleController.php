@@ -51,13 +51,8 @@ class ArticleController extends Controller
         return view('articles.edit', compact('article'));
     }
 
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-        ]);
-    
+    public function update(StoreArticleRequest $request, string $id)
+    {   
         $article = Article::findOrFail($id);
 
         // Générer un nouveau slug si le titre a été modifié
@@ -72,7 +67,7 @@ class ArticleController extends Controller
         $article->excerpt = substr($request->input('content'), 0, 100);
 
         $article->save();
-        
+
         return redirect()->route('articles.index')->with('success', 'Article updated successfully.');
     }
 
