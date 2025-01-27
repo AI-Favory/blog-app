@@ -34,7 +34,11 @@ class CreateArticle extends Component
 
         session()->flash('success', 'Article created successfully.');
 
-        return redirect()->route('articles.index');
+        // Réinitialiser les champs du formulaire
+        $this->reset(['title', 'content']);
+
+        // Émettre un événement pour rafraîchir la liste des articles
+        $this->dispatch('articleCreated');
     }
 
     public function render()
