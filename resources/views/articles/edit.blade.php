@@ -2,7 +2,7 @@
 
 @section('content')
 <h1>Éditer l'article</h1>
-<form action="{{ route('articles.update', $article->id) }}" method="POST">
+<form action="{{ route('articles.update', $article->slug) }}" method="POST">
     @csrf
     @method('PUT')
     <input type="text" name="title" value="{{ $article->title }}" required>

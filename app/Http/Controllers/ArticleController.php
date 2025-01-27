@@ -39,22 +39,18 @@ class ArticleController extends Controller
         return redirect()->route('articles.index')->with('success', 'Article created successfully.');
     }
 
-    public function show(string $id)
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
         return view('articles.show', compact('article'));
     }
 
-    public function edit(string $id)
+    public function edit(Article $article)
     {
-        $article = Article::findOrFail($id);
         return view('articles.edit', compact('article'));
     }
 
-    public function update(StoreArticleRequest $request, string $id)
+    public function update(StoreArticleRequest $request, Article $article)
     {   
-        $article = Article::findOrFail($id);
-
         // Générer un nouveau slug si le titre a été modifié
         if ($request->input('title') !== $article->title) {
             $slug = Str::slug($request->input('title'));
@@ -71,9 +67,8 @@ class ArticleController extends Controller
         return redirect()->route('articles.index')->with('success', 'Article updated successfully.');
     }
 
-    public function destroy(string $id)
+    public function destroy(Article $article)
     {
-        $article = Article::findOrFail($id);
         $article->delete();
         return redirect()->route('articles.index')->with('success', 'Article deleted successfully.');
     }
