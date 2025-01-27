@@ -1,12 +1,14 @@
 import './bootstrap';
 
-document.addEventListener('livewire:load', function () {
-    Livewire.on('articleCreated', function () {
-        setTimeout(function () {
-            let successMessage = document.getElementById('success-message');
-            if (successMessage) {
-                successMessage.style.display = 'none';
-            }
-        }, 10000); // 10 secondes
+document.addEventListener('livewire:init', () => {   
+    Livewire.on('articleCreated', () => {
+        setTimeout(() => {
+            const successMessages = document.querySelectorAll('.alert-success');
+            successMessages.forEach(message => {
+                message.style.transition = 'opacity 0.5s ease-out';
+                message.style.opacity = '0';
+                message.style.display = 'none';
+            });
+        }, 3000);
     });
 });

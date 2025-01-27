@@ -1,6 +1,6 @@
 <div class="mb-4">
     @if (session()->has('success'))
-        <div class="alert alert-success" id="success-message">
+        <div class="alert alert-success p-4 w-full bg-green-100 mb-2 rounded-[5px]">
             {{ session('success') }}
         </div>
     @endif
