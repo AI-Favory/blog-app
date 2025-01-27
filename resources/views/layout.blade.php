@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <div class="container">
+    <div class="container block mx-auto max-w-[500px] w-[80%]">
         @yield('content')
     </div>
     @livewireScripts
