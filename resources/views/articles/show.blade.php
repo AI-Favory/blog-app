@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 <h1 class="mb-2 mt-8 text-xl">{{ $article->title }}</h1>

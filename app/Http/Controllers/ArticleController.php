@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Article;
-use Illuminate\Support\Str;
-use App\Http\Requests\StoreArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -15,61 +12,9 @@ class ArticleController extends Controller
         return view('index', compact('articles'));
     }
 
-    public function create()
+    public function show($slug)
     {
-        return view('articles.create');
-    }
-
-    public function store(StoreArticleRequest $request)
-    {  
-        // Générer un extrait à partir du contenu
-        $excerpt = substr($request->input('content'), 0, 100);
-
-        // Générer un slug à partir du titre
-        $slug = Str::slug($request->input('title'));
-    
-        // Créer un nouvel article avec l'extrait généré
-        Article::create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'excerpt' => $excerpt,
-            'slug' => $slug,
-        ]);
-    
-        return redirect()->route('articles.index')->with('success', 'Article created successfully.');
-    }
-
-    public function show(Article $article)
-    {
+        $article = Article::where('slug', $slug)->firstOrFail();
         return view('articles.show', compact('article'));
-    }
-
-    public function edit(Article $article)
-    {
-        return view('articles.edit', compact('article'));
-    }
-
-    public function update(StoreArticleRequest $request, Article $article)
-    {   
-        // Générer un nouveau slug si le titre a été modifié
-        if ($request->input('title') !== $article->title) {
-            $slug = Str::slug($request->input('title'));
-            $article->slug = $slug;
-        }
-
-        // Mettre à jour les autres champs
-        $article->title = $request->input('title');
-        $article->content = $request->input('content');
-        $article->excerpt = substr($request->input('content'), 0, 100);
-
-        $article->save();
-
-        return redirect()->route('articles.index')->with('success', 'Article updated successfully.');
-    }
-
-    public function destroy(Article $article)
-    {
-        $article->delete();
-        return redirect()->route('articles.index')->with('success', 'Article deleted successfully.');
     }
 }
